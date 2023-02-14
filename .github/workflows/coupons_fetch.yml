@@ -1,6 +1,6 @@
 name: Python Script
 
-on: [push]
+on: workflow_dispatch
 
 jobs:
   build:
