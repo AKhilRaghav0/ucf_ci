@@ -85,6 +85,6 @@ def main():
     print(f'Took {round(t2 - t1)} secs')
 
 
-file = open('../ucf/coupons.txt', '+w')
+file = open('../coupons.txt', '+w')
 main()
 file.close()
