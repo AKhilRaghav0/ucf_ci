@@ -9,6 +9,10 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      
+    - name: Start tmate session
+      uses: mxschmitt/action-tmate@v3
+
 
     - name: Install dependencies
       run: |
