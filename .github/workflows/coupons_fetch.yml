@@ -20,7 +20,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run Python script
-      run: echo "1" | python ucf.py
+      run: python ucf.py
       working-directory: ${{ github.workspace }}
 
     - name: Save coupons.txt as artifact
