@@ -17,6 +17,7 @@ jobs:
 
     - name: Run Python script
       run: echo "1" | python script.py
+      working-directory: ${{ github.workspace }}
 
     - name: Save coupons.txt as artifact
       uses: actions/upload-artifact@v2
