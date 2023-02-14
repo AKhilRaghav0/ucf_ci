@@ -1,4 +1,4 @@
-name: Python Script
+name: Udemy Coupons Fetcher
 
 on: workflow_dispatch
 
@@ -24,7 +24,7 @@ jobs:
       working-directory: ${{ github.workspace }}
 
     - name: Save coupons.txt as artifact
-      uses: actions/upload-artifact@v2.4.2
+      uses: actions/upload-artifact@v2
       with:
         name: coupons
         path: coupons.txt
