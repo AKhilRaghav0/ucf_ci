@@ -22,5 +22,9 @@ This is a Python script for fetching Udemy coupons from the website [DiscUdemy](
 
 After running the workflow, the coupon links and code will be stored in a compressed archive format in the "Artifacts" section of the workflow run. The compressed archive will be in ".zip" format, and can be easily downloaded and extracted to access the "coupons.txt" file containing the coupon links and script.
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=AKhilRaghav0/ucf_ci&type=Date)](https://star-history.com/#AKhilRaghav0/ucf_ci&Date)
+
 ------
 Note: This script is made for educational purposes only. Any misuse of this tool is not the author's responsibility.
