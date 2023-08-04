@@ -1,6 +1,10 @@
 name: Udemy Coupons Fetcher
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  # Add the following schedule to run the workflow every 24 hours
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
   build:
@@ -8,24 +12,29 @@ jobs:
     timeout-minutes: 2
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-  #   For Debug into the runner image 
-  #  - name: Start tmate session
-  #    uses: mxschmitt/action-tmate@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+      - name: Run Python script
+        run: python ucf_ci.py
+        working-directory: ${{ github.workspace }}
 
-    - name: Run Python script
-      run: python ucf_ci.py
-      working-directory: ${{ github.workspace }}
+      - name: Save coupons.txt as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coupons
+          path: coupons.txt
 
-    - name: Save coupons.txt as artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: coupons
-        path: coupons.txt
+      - name: Upload to Telegram
+        run: |
+          BOT_TOKEN="${{ secrets.TELEGRAM_BOT_TOKEN }}"
+          CHAT_ID="${{ secrets.TELEGRAM_CHAT_ID }}"
+          curl -F document=@coupons.txt "https://api.telegram.org/bot${BOT_TOKEN}/sendDocument?chat_id=${CHAT_ID}"
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
